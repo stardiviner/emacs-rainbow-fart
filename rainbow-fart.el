@@ -151,8 +151,10 @@ If it's nil, the hours remind will not started."
 
 (defun rainbow-fart--post-self-insert ()
   "A hook function on `post-self-insert-hook' to play audio."
-  (let* ((prefix (thing-at-point 'symbol)))
-    (rainbow-fart--play prefix)))
+  (let* ((f (get-text-property (- (point) 1) 'face))
+         (prefix (thing-at-point 'symbol)))
+    (unless (memq f '(font-lock-string-face font-lock-comment-face font-lock-doc-face))
+      (rainbow-fart--play prefix))))
 
 ;;; linter like `flycheck'
 
