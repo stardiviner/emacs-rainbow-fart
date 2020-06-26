@@ -2,7 +2,9 @@
 
 [[https://github.com/stardiviner/emacs-rainbow-fart/workflows/CI/badge.svg]]
 
-[[emacs-rainbow-fart logo.png][emacs-rainbow-fart logo.png]]
+[[logo.png]]
+
+🌈 EMACS RAINBOW FART
 
 This package is inspired from [[https://saekiraku.github.io/vscode-rainbow-fart/#/zh/][vscode-rainbow-fart]] and [[https://github.com/DogLooksGood/rainbow-fart.el][rainbow-fart.el]].
 
@@ -10,18 +12,7 @@ This is an interesting idea package.
 
 Here is a screencast which is recorded by [[https://github.com/DogLooksGood][DogLooksGood]].
 
-#+begin_export html
-<video src="Emacs rainbow-fart demo.mp4" type="video/mp4" autoplay controls="controls">
-  emacs-rainbow-fart demo
-</video>
-#+end_export
-
-[[Emacs rainbow-fart demo.mp4]]
-
-** LICENSE
-
-This package elisp code is published under GPL v3, the voice data is from
-[[https://github.com/JustKowalski][GitHub@JustKowalski]] and project [[https://github.com/SaekiRaku/vscode-rainbow-fart][vscode-rainbow-fart]] which is released under [[https://github.com/SaekiRaku/vscode-rainbow-fart/blob/master/LICENSE][MIT license]].
+[[file:Emacs rainbow-fart demo.mp4][Emacs rainbow-fart demo.mp4]]
 
 * Features
 
@@ -39,6 +30,42 @@ This package elisp code is published under GPL v3, the voice data is from
   :hook (prog-mode . rainbow-fart-mode))
 #+end_src
 
+* Usage
+
+Just like the screencast video shows, A voice played when you type some keywords.
+
+* Customization
+
+** choose voice model
+
+#+begin_src emacs-lisp
+(setq rainbow-fart-voice-model "JustKowalski")
+#+end_src
+
+*NOTE*: Currently only "JustKowalski" built-in. Contribution welcome.
+
+** control keyword voice
+
+Not frequently play voice for every keywords:
+
+#+begin_src emacs-lisp
+(setq rainbow-fart-keyword-interval (* 60 10))
+#+end_src
+
+Play voice for every keywords:
+
+#+begin_src emacs-lisp
+(setq rainbow-fart-keyword-interval nil)
+#+end_src
+
+** control hourly reminder
+
+Disable hourly reminder:
+
+#+begin_src emacs-lisp
+(setq rainbow-fart-time-interval nil)
+#+end_src
+
 * Contribution
 
 - [ ] Need an elegant solution to handle different model voices which have different voice files
@@ -50,123 +77,8 @@ This package elisp code is published under GPL v3, the voice data is from
 - DogLooksGood
 - lujun9972
 
-* Usage
+* LICENSE
 
-Just like the screencast video shows, A voice played when you type some keywords.
-
-* Customization
-
-** Don't want keyword voice so frequent? 不想要关键字语音如此频繁？
-
-#+begin_src emacs-lisp
-(setq rainbow-fart-keyword-interval (* 60 10))
-#+end_src
-
-** Don't want hourly reminder? 不想要定时的中午，傍晚和晚上加班？
-
-#+begin_src emacs-lisp
-(setq rainbow-fart-time-interval nil)
-#+end_src
-
-** Choose voice model 选择语音包
-
-#+begin_src emacs-lisp
-(setq rainbow-fart-voice-model "JustKowalski")
-#+end_src
-
-*NOTE*: Currently only "JustKowalski" built-in. Contribution welcome.
-
-* 音频列表
-
-*** Common
-
-function
-
-  - [x] 哇哦，你的回调函数写的好棒棒呀！
-  - [x] 这个函数的命名用我的名字怎么样呀？
-  - [x] 再厉害的函数，也执行不出我对你的喜欢！
-
-arrow function
-
-  - [x] 你写箭头函数的样子好帅呀！
-
-extends
-
-  - [ ] 你想不想顺便继承我的蚂蚁花呗替我还钱呀？
-  - [ ] 你想不想继承我的可爱呀？
-
-if
-
-  - [x] 你就是因为想太多如果，所以才交不到女朋友吧？
-  - [x] 人生没有那么多如果，有没有比编程更容易呢？
-  - [x] 别试了，我的可爱不需要用 if 来判断！
-
-for
-
-  - [x] 这段循环是为我写的吗？
-  - [x] 你是在遍历你的鱼塘吗？
-  - [x] 你就算运行 1 天也遍历不完我的可爱！
-
-await
-
-  - [x] 你在等什么？是不是在等我！
-  - [x] 别忘了给函数体加 async 哦。
-  - [x] 别等啦！如果你有喜欢的女孩子，就要赶快表白。
-
-catch
-
-  - [x] 嘻嘻，捕捉了这么多异常，却捉不到一个女朋友。
-  - [x] 别太关注程序的异常，多关注下身边的女孩子吧！
-  - [x] 听说，异步代码捕捉不到异常哦！
-
-import
-
-  - [x] 我的可爱已成功导入！
-  - [x] 我的美貌已成功导入！
-  - [x] 我的才华已成功导入！
-
-*** Vue
-
-v-html
-
-  - [x] 记得校验内容，预防 XSS 攻击哦。
-
-*** Mood
-
-fuck/shit
-
-  - [x] 怎么了？是不是产品需求又改了？
-  - [x] 我们一起揍产品经理一顿吧！
-
-*** Time
-
-$time_morning
-
-  - [x] 早上好呀!
-
-$time_before_noon
-
-  - [x] 中午咯，你吃午饭了嘛？
-  - [x] 要按时吃午饭哦。
-  - [x] 中午要吃什么呢？
-  - [x] 小哥哥，中午帮我订麻辣烫吧。
-$time_noon
-
-  - [x] 要午休下午才能有精神呀。
-
-$time_evening
-
-  - [x] 你怎么还没下班呀？
-
-$time_midnight
-
-  - [x] 很晚了哦，要早点休息！
-
-$time_each_hour
-
-  - [x] 小哥哥你累不累呀？
-  - [x] 写了好久了，起来休息一下吧。
-  - [x] 写这么多代码，还不如给女孩子写情书！
-  - [x] 你这么喜欢写代码，一定没有女朋友吧！
-  - [x] 如果你用了别的小姐姐的语音包，我就掐死你哦！
+This package elisp code is published under GPL v3, the voice data is from
+[[https://github.com/JustKowalski][GitHub@JustKowalski]] and project [[https://github.com/SaekiRaku/vscode-rainbow-fart][vscode-rainbow-fart]] which is released under [[https://github.com/SaekiRaku/vscode-rainbow-fart/blob/master/LICENSE][MIT license]].
 

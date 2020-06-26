@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Encourage when you programming -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-06-23 21:31:52 stardiviner>
+;;; Time-stamp: <2020-06-24 18:01:21 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -40,6 +40,7 @@
 (defcustom rainbow-fart-voice-alist
   '(("defun" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
     ("defn" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
+    ("def" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
     ("fn" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
     ("lambda" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
     ("function" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
@@ -151,9 +152,10 @@ If it's nil, the hours remind will not started."
 
 (defun rainbow-fart--post-self-insert ()
   "A hook function on `post-self-insert-hook' to play audio."
-  (let* ((f (get-text-property (- (point) 1) 'face))
-         (prefix (thing-at-point 'symbol)))
-    (unless (memq f '(font-lock-string-face font-lock-comment-face font-lock-doc-face))
+  (let* ((prefix (thing-at-point 'symbol))
+         (face (get-text-property (1- (point)) 'face)))
+    (when (or (memq face '(font-lock-keyword-face))
+              (null face))
       (rainbow-fart--play prefix))))
 
 ;;; linter like `flycheck'
@@ -197,7 +199,10 @@ If it's nil, the hours remind will not started."
 
 (defun rainbow-fart--timing-remind ()
   "Remind you in specific time quantum."
-  (rainbow-fart--play (rainbow-fart--timing)))
+  (when (and rainbow-fart--play-last-time
+             (> (- (float-time) rainbow-fart--play-last-time) rainbow-fart-time-interval))
+    (rainbow-fart--play (rainbow-fart--timing))
+    (setq rainbow-fart--play-last-time (float-time))))
 
 (defvar rainbow-fart--timer nil)
 
