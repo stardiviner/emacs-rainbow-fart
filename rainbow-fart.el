@@ -31,6 +31,7 @@
 
 (require 'flycheck)
 (require 'url)
+(require 'ob-core)
 
 (defgroup rainbow-fart nil
   "rainbow-fart-mode customize group."
@@ -112,21 +113,52 @@ If it's nil, the hours remind will not started."
   :safe #'numberp
   :group 'rainbow-fart)
 
+(defcustom rainbow-fart-guess-p nil
+  "Whether guess the fart video or not.
+If it's nil, fart video is played only if the keyword is extract the same as the car of `rainbow-fart-voice-alist`."
+  :type 'boolean
+  :group 'rainbow-fart)
+
+(defcustom rainbow-fart-max-distance 3
+  "TODO: Don't know how to describe it."
+  :type 'number
+  :safe #'numberp
+  :group 'rainbow-fart)
+
+
 (defvar rainbow-fart--playing nil
   "The status of rainbow-fart playing.")
 
 (defvar rainbow-fart--play-last-time nil
   "The last time of rainbow-fart play.")
 
+(defun rainbow-fart--guess-the-keyword (keyword)
+  "Find the nearest available keyword by KEYWORD."
+  (let* ((available-keywords (mapcar #'car rainbow-fart-voice-alist))
+         (keyword-distances (mapcar (lambda (avaible-keyword)
+                                      (cons (org-babel-edit-distance avaible-keyword keyword) avaible-keyword))
+                                    available-keywords))
+         (sorted-keyword-distance (sort keyword-distances
+                                        (lambda (item1 item2)
+                                          (< (car item1) (car item2)))))
+         (nearest-keyword-distance (car sorted-keyword-distance))
+         (nearest-distance (car nearest-keyword-distance))
+         (nearest-keyword (cdr nearest-keyword-distance)))
+    (when (<= nearest-distance rainbow-fart-max-distance)
+      nearest-keyword)))
+
 (defun rainbow-fart--get-media-uri (keyword)
   "Get media uri based on KEYWORD."
-  (when-let ((uris (cdr (assoc keyword rainbow-fart-voice-alist))))
-    (let ((uri (nth (random (length uris)) uris)))
-      (if (url-type (url-generic-parse-url uri))
-          uri
-        (let ((uri (expand-file-name uri rainbow-fart-voice-directory)))
-          (when (file-exists-p uri)
-            uri))))))
+  (let ((keyword (if rainbow-fart-guess-p
+                     (rainbow-fart--guess-the-keyword keyword)
+                   keyword)))
+    (when-let ((uris (cdr (assoc keyword rainbow-fart-voice-alist))))
+      (let ((uri (nth (random (length uris)) uris)))
+        (if (url-type (url-generic-parse-url uri))
+            uri
+          (let ((uri (expand-file-name uri rainbow-fart-voice-directory)))
+            (when (file-exists-p uri)
+              uri)))))))
 
 
 (defun rainbow-fart--play (keyword)
@@ -154,7 +186,10 @@ If it's nil, the hours remind will not started."
   "A hook function on `post-self-insert-hook' to play audio."
   (let* ((prefix (thing-at-point 'symbol))
          (face (get-text-property (1- (point)) 'face)))
-    (when (or (memq face '(font-lock-keyword-face))
+    (when (memq face '(font-lock-keyword-face))
+      (rainbow-fart--play prefix))
+    ;; 猜测模式只适合明确是语言关键字的情况下使用
+    (when (and (null rainbow-fart-guess-p)
               (null face))
       (rainbow-fart--play prefix))))
 
