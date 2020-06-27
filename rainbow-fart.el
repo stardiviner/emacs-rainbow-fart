@@ -111,6 +111,14 @@ If it's nil, the hours remind will not started."
   :safe #'numberp
   :group 'rainbow-fart)
 
+(defcustom rainbow-fart-recorder-template nil
+  "The command line template to record voice file.
+
+%f will be replaced to the voice file name."
+  :type 'string
+  :safe #'stringp
+  :group 'rainbow-fart)
+
 (defvar rainbow-fart--playing nil
   "The status of rainbow-fart playing.")
 
@@ -206,6 +214,19 @@ If it's nil, the hours remind will not started."
     (setq rainbow-fart--play-last-time (float-time))))
 
 (defvar rainbow-fart--timer nil)
+
+;;;###autoload
+(defun rainbow-fart-add-fart-voice ()
+  "Create a voice file which stored under the voice model directory."
+  (interactive)
+  (unless rainbow-fart-recorder-template
+    (error "rainbow-fart-recorder-template undefined!"))
+  (let* ((keyword (read-string "what keyword do you want to recorded for: " (thing-at-point 'symbol)))
+         (model-directory (expand-file-name rainbow-fart-voice-model rainbow-fart-voices-directory))
+         (voice-file-name (format "%s-%s.mp3" keyword (float-time)))
+         (voice-file-path (expand-file-name voice-file-name model-directory))
+         (record-cmd (replace-regexp-in-string "%f" voice-file-path rainbow-fart-recorder-template)))
+    (shell-command record-cmd)))
 
 ;;;###autoload
 (define-minor-mode rainbow-fart-mode
