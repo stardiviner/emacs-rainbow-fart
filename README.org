@@ -12,7 +12,7 @@ This is an interesting idea package.
 
 Here is a screencast which is recorded by [[https://github.com/DogLooksGood][DogLooksGood]].
 
-[[file:Emacs rainbow-fart demo.mp4][Emacs rainbow-fart demo.mp4]]
+[[Emacs rainbow-fart demo.mp4][Emacs rainbow-fart demo.mp4]]
 
 * Features
 
