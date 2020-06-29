@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Encourage when you programming -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-06-26 08:49:32 stardiviner>
+;;; Time-stamp: <2020-06-29 16:24:38 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -91,7 +91,7 @@
   :group 'rainbow-fart)
 
 (defcustom rainbow-fart-voices-directory
-  (concat (file-name-directory (or load-file-name buffer-file-name)) "voices/")
+  (file-name-directory (or load-file-name buffer-file-name))
   "The directory of voices."
   :type 'string
   :safe #'stringp
