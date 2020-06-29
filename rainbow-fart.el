@@ -1,6 +1,6 @@
-;;; rainbow-fart.el --- Encourage when you programming -*- lexical-binding: t; -*-
+;;; rainbow-fart.el --- checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-06-29 16:24:38 stardiviner>
+;;; Time-stamp: <2020-06-29 16:34:42 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))

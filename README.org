@@ -10,6 +10,9 @@ This package is inspired from [[https://saekiraku.github.io/vscode-rainbow-fart/
 
 This is an interesting idea package.
 
+An Emacs extension that keeps giving you compliment while you are coding, it
+will checks the keywords of code to play suitable sounds.
+
 Here is a screencast which is recorded by [[https://github.com/DogLooksGood][DogLooksGood]].
 
 [[Emacs rainbow-fart demo.mp4][Emacs rainbow-fart demo.mp4]]
