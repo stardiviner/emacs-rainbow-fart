@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-06-29 16:46:14 stardiviner>
+;;; Time-stamp: <2020-06-29 16:47:05 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -232,7 +232,7 @@ If it's nil, the hours remind will not started."
 (define-minor-mode rainbow-fart-mode
   "A minor mode add an encourager when you programming."
   :init-value nil
-  :lighter " rainbow-fart "
+  :lighter " rainbow-fart"
   :group 'rainbow-fart
   (if rainbow-fart-mode
       (progn
