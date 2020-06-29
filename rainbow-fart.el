@@ -1,6 +1,6 @@
-;;; rainbow-fart.el --- checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
+;;; rainbow-fart.el --- Checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-06-29 16:40:55 stardiviner>
+;;; Time-stamp: <2020-06-29 16:46:14 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -220,7 +220,7 @@ If it's nil, the hours remind will not started."
   "Create a voice file which stored under the voice model directory."
   (interactive)
   (unless rainbow-fart-recorder-template
-    (error "rainbow-fart-recorder-template undefined!"))
+    (error "The variable rainbow-fart-recorder-template is undefined!"))
   (let* ((keyword (read-string "what keyword do you want to recorded for: " (thing-at-point 'symbol)))
          (model-directory (expand-file-name rainbow-fart-voice-model rainbow-fart-voices-directory))
          (voice-file-name (format "%s-%s.mp3" keyword (float-time)))
