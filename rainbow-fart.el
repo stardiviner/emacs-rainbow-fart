@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-06-29 16:34:42 stardiviner>
+;;; Time-stamp: <2020-06-29 16:40:55 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -91,7 +91,7 @@
   :group 'rainbow-fart)
 
 (defcustom rainbow-fart-voices-directory
-  (file-name-directory (or load-file-name buffer-file-name))
+  (concat (file-name-directory (or load-file-name buffer-file-name)) "voices/")
   "The directory of voices."
   :type 'string
   :safe #'stringp
