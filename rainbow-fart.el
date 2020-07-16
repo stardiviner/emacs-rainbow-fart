@@ -232,7 +232,7 @@ If it's nil, the hours remind will not started."
 (define-minor-mode rainbow-fart-mode
   "A minor mode add an encourager when you programming."
   :init-value nil
-  :lighter " rainbow-fart"
+  :lighter nil
   :group 'rainbow-fart
   (if rainbow-fart-mode
       (progn
