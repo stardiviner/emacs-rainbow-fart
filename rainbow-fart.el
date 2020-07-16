@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-15 22:23:13 stardiviner>
+;;; Time-stamp: <2020-07-16 09:36:42 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -234,6 +234,7 @@ If it's nil, the hours remind will not started."
   :init-value nil
   :lighter nil
   :group 'rainbow-fart
+  :global nil
   (if rainbow-fart-mode
       (progn
         (add-hook 'post-self-insert-hook #'rainbow-fart--post-self-insert t t)
