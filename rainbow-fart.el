@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-15 18:16:06 stardiviner>
+;;; Time-stamp: <2020-07-15 22:23:13 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -241,7 +241,7 @@ If it's nil, the hours remind will not started."
                     :before 'rainbow-fart--linter-display-errors)
         (when rainbow-fart-time-interval
           (setq rainbow-fart--timer
-                (run-with-timer 10 rainbow-fart-time-interval 'rainbow-fart--timing-remind))))
+                (run-with-timer 0 rainbow-fart-time-interval 'rainbow-fart--timing-remind))))
     (remove-hook 'post-self-insert-hook #'rainbow-fart--post-self-insert t)
     (advice-remove (buffer-local-value 'flycheck-display-errors-function (current-buffer))
                    'rainbow-fart--linter-display-errors)
