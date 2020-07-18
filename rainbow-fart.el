@@ -234,7 +234,7 @@ If it's nil, the hours remind will not started."
   :init-value nil
   :lighter nil
   :group 'rainbow-fart
-  :global nil
+  :global t
   (if rainbow-fart-mode
       (progn
         (add-hook 'post-self-insert-hook #'rainbow-fart--post-self-insert t t)
