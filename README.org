@@ -29,8 +29,8 @@ Here is a screencast which is recorded by [[https://github.com/DogLooksGood][Dog
 
 #+begin_src emacs-lisp
 (use-package rainbow-fart
-  :hook (prog-mode . rainbow-fart-mode))
   :ensure t
+  :init (rainbow-fart-mode 1))
 #+end_src
 
 * Usage
