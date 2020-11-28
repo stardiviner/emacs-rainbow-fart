@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-18 12:36:56 stardiviner>
+;;; Time-stamp: <2020-11-28 09:45:12 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -169,8 +169,10 @@ If it's nil, the hours remind will not started."
   "A hook function on `post-self-insert-hook' to play audio."
   (when (or (derived-mode-p 'prog-mode)
             (memq major-mode rainbow-fart-enable-modes))
-    (let* ((prefix (thing-at-point 'symbol))
-           (face (get-text-property (1- (point)) 'face)))
+    (let* ((prefix (save-excursion
+                     (goto-char (- (point) 2))
+                     (thing-at-point 'symbol)))
+           (face (get-text-property (- (point) 2) 'face)))
       (when (or (memq face '(font-lock-keyword-face))
                 (null face))
         (rainbow-fart--play prefix)))))
