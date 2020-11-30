@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-11-28 09:45:12 stardiviner>
+;;; Time-stamp: <2020-11-30 14:38:24 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -170,9 +170,9 @@ If it's nil, the hours remind will not started."
   (when (or (derived-mode-p 'prog-mode)
             (memq major-mode rainbow-fart-enable-modes))
     (let* ((prefix (save-excursion
-                     (goto-char (- (point) 2))
+                     (goto-char (- (point) 1))
                      (thing-at-point 'symbol)))
-           (face (get-text-property (- (point) 2) 'face)))
+           (face (get-text-property (- (point) 1) 'face)))
       (when (or (memq face '(font-lock-keyword-face))
                 (null face))
         (rainbow-fart--play prefix)))))
