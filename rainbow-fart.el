@@ -1,6 +1,6 @@
 ;;; rainbow-fart.el --- Checks the keywords of code to play suitable sounds -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-11-30 14:38:24 stardiviner>
+;;; Time-stamp: <2020-12-28 08:05:58 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25.1") (flycheck "32-cvs"))
@@ -159,7 +159,7 @@ If it's nil, the hours remind will not started."
       (setq rainbow-fart--playing t)
       (make-process :name "rainbow-fart"
                     :command `(,command ,uri)
-                    :buffer "*rainbow-fart*"
+                    :buffer " *rainbow-fart*"
                     :sentinel (lambda (_ __)
                                 (setq rainbow-fart--playing nil)
                                 (setq rainbow-fart--play-last-time (float-time)))))))
