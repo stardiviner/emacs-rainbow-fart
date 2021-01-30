@@ -1,0 +1,426 @@
+{
+	"name": "AcFun-Chi-Python-Chinese",
+	"version": "1.0",
+	"author": "黑小白",
+	"display-name": "AcFun 营业型千岛 Python[Chinese]",
+	"description": "由AcFun知名VUP 营业型千岛 配音的Python语音包，61条语音与6首歌曲",
+	"avatar": "chi.png",
+	"avatar-dark": "chi_dark.png",
+	"languages": [
+		"python"
+	],
+	"locale": "zh",
+	"gender": "female",
+	"contributes": [{
+			"keywords": [
+				"python this",
+				"Python this",
+				"The Zen of Python",
+				"the zen of python"
+			],
+			"voices": [
+				"python_this_1.mp3",
+				"python_this_2.mp3",
+				"python_this_4.mp3",
+				"python_this_5.mp3",
+				"python_this_6.mp3",
+				"python_this_7.mp3",
+				"python_this_8.mp3",
+				"python_this_9.mp3",
+				"python_this_10.mp3",
+				"python_this_11.mp3"
+			],
+			"texts": [
+				"优美胜于丑陋，我觉得最好的代码同时也是优雅的",
+				"明了胜于晦涩，至少代码应该清晰到能让我看懂吧",
+				"简洁胜于复杂，优雅的代码应该是简洁的",
+				"复杂胜于凌乱，如果复杂的代码不可避免，那至少不要太乱",
+				"扁平胜于嵌套，我讨厌一大堆嵌套",
+				"间隔胜于紧凑，我不觉得一行代码包含三个功能五个逻辑是好事",
+				"可读性很重要，两年后你还能否看懂自己的代码？",
+				"不要包容所有错误,除非你确定需要这样做",
+				"尽量找一种,最好是唯一一种明显的解决方案",
+				"做也许好过不做,但不假思索就动手做还不如不做",
+				"如果你无法向人描述你的方案,那肯定不是一个好方案;反之亦然"
+			]
+		},
+		{
+			"keywords": [
+				"import "
+			],
+			"voices": [
+				"import_1.mp3",
+				"import_2.mp3"
+			],
+			"texts": [
+				"千岛声音模块加载中……",
+				"把我的才华也给导入了吧！"
+			]
+		},
+		{
+			"keywords": [
+				"def "
+			],
+			"voices": [
+				"def_1.mp3",
+				"def_2.mp3",
+				"del_3.mp3",
+				"python_this_1.mp3"
+			],
+			"texts": [
+				"我觉得你会写一个很棒的函数！",
+				"这个函数的命名用我的名字怎么样呀？",
+				"函数的命名想好了吗？",
+				"优美胜于丑陋，我觉得最好的代码同时也是优雅的"
+			]
+		},
+		{
+			"keywords": [
+				"if "
+			],
+			"voices": [
+				"if_1.mp3",
+				"if_2.mp3",
+				"if_3.mp3",
+				"if_4.mp3",
+				"python_this_2.mp3",
+				"python_this_6.mp3",
+				"python_this_7.mp3"
+			],
+			"texts": [
+				"初号机和二号机，你会选哪个？",
+				"如果人生有烦恼，可以来找我聊一聊噢",
+				"人生没有那么多如果，有什么比编程更容易呢？",
+				"如果看到卖西瓜的，就买一个"
+			]
+		},
+		{
+			"keywords": [
+				"else ",
+				"else:"
+			],
+			"voices": [
+				"else_1.mp3"
+			],
+			"texts": [
+				"编程的道路上并非总是一方通行"
+			]
+		},
+		{
+			"keywords": [
+				"for ",
+				"while "
+			],
+			"voices": [
+				"for_1.mp3",
+				"for_2.mp3",
+				"for_3.mp3",
+				"python_this_2.mp3",
+				"python_this_5.mp3",
+				"python_this_7.mp3"
+			],
+			"texts": [
+				"朴素生活日复一日，这就是人生啊",
+				"小心陷入死胡同！",
+				"这段循环是为我而写的吗",
+				"明了胜于晦涩，至少代码应该清晰到能让我看懂吧",
+				"扁平胜于嵌套，我讨厌一大堆嵌套",
+				"可读性很重要，两年后你还能否看懂自己的代码？"
+			]
+		},
+		{
+			"keywords": [
+				"break\n",
+				"break\r\n"
+			],
+			"voices": [
+				"break_1.mp3",
+				"break_2.mp3"
+			],
+			"texts": [
+				"结束掉这个循环吧！",
+				"结束这个不断循环的世界"
+			]
+		},
+		{
+			"keywords": [
+				"continue\n",
+				"continue\r\n"
+			],
+			"voices": [
+				"continue_1.mp3",
+				"continue_2.mp3"
+			],
+			"texts": [
+				"人生总会迷茫，但生活还要继续啊",
+				"这个世界线已经没救了，进入下一个吧"
+			]
+		},
+		{
+			"keywords": [
+				"try:"
+			],
+			"voices": [
+				"try_1.mp3"
+			],
+			"texts": [
+				"及时关注可能发生的错误"
+			]
+		},
+		{
+			"keywords": [
+				"except ",
+				"except:"
+			],
+			"voices": [
+				"except_1.mp3",
+				"except_2.mp3"
+			],
+			"texts": [
+				"现在开始执行B计划",
+				"关注程序的异常，也请关心自己的健康"
+			]
+		},
+		{
+			"keywords": [
+				"finally:"
+			],
+			"voices": [
+				"finally_1.mp3"
+			],
+			"texts": [
+				"无论最终如何，一定会执行的"
+			]
+		},
+		{
+			"keywords": [
+				"print("
+			],
+			"voices": [
+				"print_1.mp3",
+				"print_2.mp3",
+				"python_this_6.mp3"
+			],
+			"texts": [
+				"是想输出什么呢？",
+				"程序会忠实地告诉你它所知道的"
+			]
+		},
+		{
+			"keywords": [
+				"del ",
+				"del("
+			],
+			"voices": [
+				"del_1.mp3",
+				"del_2.mp3"
+			],
+			"texts": [
+				"要删掉什么东西呢？",
+				"如果烦恼也能这样随意删除就好了"
+			]
+		},
+		{
+			"keywords": [
+				"pass\n"
+			],
+			"voices": [
+				"pass_1.mp3",
+				"pass_2.mp3"
+			],
+			"texts": [
+				"最好的代码就是什么都不做！",
+				"没有什么代码的执行速度比空代码更快"
+			]
+		},
+		{
+			"keywords": [
+				"True"
+			],
+			"voices": [
+				"true_1.mp3"
+			],
+			"texts": [
+				"真又如何"
+			]
+		},
+		{
+			"keywords": [
+				"False"
+			],
+			"voices": [
+				"false_1.mp3"
+			],
+			"texts": [
+				"假又如何"
+			]
+		},
+		{
+			"keywords": [
+				"return ",
+				"return("
+			],
+			"voices": [
+				"return_1.mp3"
+			],
+			"texts": [
+				"返回什么东西好呢？"
+			]
+		},
+		{
+			"keywords": [
+				"Ture"
+			],
+			"voices": [
+				"ture_1.mp3"
+			],
+			"texts": [
+				"是True啦笨蛋~"
+			]
+		},
+		{
+			"keywords": [
+				"Flase"
+			],
+			"voices": [
+				"flase_1.mp3"
+			],
+			"texts": [
+				"是False啦笨蛋~"
+			]
+		},
+		{
+			"keywords": [
+				"mian"
+			],
+			"voices": [
+				"mian_1.mp3"
+			],
+			"texts": [
+				"你确定不是main？"
+			]
+		},
+		{
+			"keywords": [
+				"$time_morning"
+			],
+			"voices": [
+				"time_morning_1.mp3",
+				"time_morning_2.mp3"
+			],
+			"texts": [
+				"おはよう",
+				"吃早饭了吗？一定要按时吃饭啊"
+			]
+		},
+		{
+			"keywords": [
+				"$time_before_noon"
+			],
+			"voices": [
+				"time_before_noon_1.mp3",
+				"time_before_noon_2.mp3",
+				"time_before_noon_3.mp3"
+			],
+			"texts": [
+				"中午咯，你吃午饭了嘛？",
+				"要按时吃午饭哦",
+				"中午要吃什么呢？"
+			]
+		},
+		{
+			"keywords": [
+				"$time_noon"
+			],
+			"voices": [
+				"time_noon_1.mp3"
+			],
+			"texts": [
+				"要午休下午才能有精神呀"
+			]
+		},
+		{
+			"keywords": [
+				"$time_evening"
+			],
+			"voices": [
+				"time_evening_1.mp3"
+			],
+			"texts": [
+				"你怎么还没下班呀？"
+			]
+		},
+		{
+			"keywords": [
+				"$time_midnight"
+			],
+			"voices": [
+				"time_midnight_1.mp3",
+				"time_midnight_2.mp3",
+				"time_midnight_3.mp3",
+				"time_midnight_4.mp3"
+			],
+			"texts": [
+				"愿梦里没有bug",
+				"很晚了哦，要早点休息！",
+				"写个TODO，明天再继续写吧~",
+				"早睡早起身体好"
+			]
+		},
+		{
+			"keywords": [
+				"$time_each_hour"
+			],
+			"voices": [
+				"time_each_hour_1.mp3",
+				"time_each_hour_2.mp3",
+				"time_each_hour_3.mp3",
+				"time_each_hour_4.mp3",
+				"time_each_hour_5.mp3"
+			],
+			"texts": [
+				"喝点水吧？",
+				"你累不累呀？要不休息一下吧",
+				"不要一直坐着，起来运动运动吧！",
+				"你认真写代码的样子，很帅",
+				"我看到了！你刚刚在摸鱼！"
+			]
+		},
+		{
+			"keywords": [
+				"com:music"
+			],
+			"voices": [
+				"com_music_1.mp3",
+				"com_music_2.mp3",
+				"com_music_3.mp3",
+				"com_music_4.mp3",
+				"com_music_5.mp3",
+				"com_music_6.mp3"
+			],
+			"texts": [
+				"播放：爱在A站",
+				"播放：爱在A站-音痴版",
+				"播放：命犯桃花-音痴版",
+				"播放：纸片机器人也要学扭腰 ",
+				"播放：呐呐呐",
+				"播放：皮卡丘之歌"
+			]
+		},
+		{
+			"keywords": [
+				"AcFun",
+				"acfun",
+				"ACFUN"
+			],
+			"voices": [
+				"acfun_1.mp3",
+				"acfun_2.mp3"
+			],
+			"texts": [
+				"AC在，爱一直在",
+				"是在写A站的代码么？"
+			]
+		}
+	]
+}
