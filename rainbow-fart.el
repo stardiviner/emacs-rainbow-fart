@@ -243,8 +243,8 @@ If it's nil, the hours remind will not started."
 (defvar rainbow-fart--timer nil)
 
 ;;;###autoload
-(defun rainbow-fart-add-fart-voice ()
-  "Create a voice file which stored under the voice model directory."
+(defun rainbow-fart-record-voice-for-keyword ()
+  "Record a voice file which stored under the voice model directory."
   (interactive)
   (unless rainbow-fart-recorder-template
     (error "The variable rainbow-fart-recorder-template is undefined!"))
@@ -253,7 +253,10 @@ If it's nil, the hours remind will not started."
          (voice-file-name (format "%s-%s.mp3" keyword (float-time)))
          (voice-file-path (expand-file-name voice-file-name model-directory))
          (record-cmd (replace-regexp-in-string "%f" voice-file-path rainbow-fart-recorder-template)))
-    (shell-command record-cmd)))
+    (shell-command record-cmd))
+  ;; TODO write new audio file and keyword to contributions JSON file.
+  )
+
 
 ;;;###autoload
 (define-minor-mode rainbow-fart-mode
