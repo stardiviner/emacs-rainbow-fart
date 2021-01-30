@@ -22,6 +22,8 @@ Here is a screencast which is recorded by [[https://github.com/DogLooksGood][Dog
 - auto play voice when you type keywords
 - auto play voice when you put point/cursor on flycheck error
 - auto play voice when in specific time quantum
+- support and compatible with vscode-rainbow-fart voice pack spec through
+  "manifest.json", "contributes.json" files.
 
 * Install
 
