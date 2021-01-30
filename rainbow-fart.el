@@ -31,57 +31,11 @@
 
 (require 'flycheck)
 (require 'url)
+(require 'json)
 
 (defgroup rainbow-fart nil
   "rainbow-fart-mode customize group."
   :prefix "rainbow-fart-"
-  :group 'rainbow-fart)
-
-(defcustom rainbow-fart-voice-alist
-  '(("defun" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
-    ("defn" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
-    ("def" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
-    ("fn" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
-    ("lambda" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
-    ("function" . ("function.mp3" "function_01.mp3" "function_02.mp3" "function_03.mp3"))
-    ("->" . ("arrow_function_01.mp3"))
-    ("->>" . ("arrow_function_01.mp3"))
-    ("=>" . ("arrow_function_01.mp3"))
-    ("if" . ("if_01.mp3" "if_02.mp3" "if_03.mp3"))
-    ("while" . ("if_01.mp3" "if_02.mp3" "if_03.mp3"))
-    ("when" . ("if_01.mp3" "if_02.mp3" "if_03.mp3"))
-    ("until" . ("if_01.mp3" "if_02.mp3" "if_03.mp3"))
-    ("for" . ("for_01.mp3" "for_02.mp3" "for_03.mp3"))
-    ("loop" . ("for_01.mp3" "for_02.mp3" "for_03.mp3"))
-    ("await" . ("await_01.mp3" "await_02.mp3" "await_03.mp3"))
-    ("promise" . ("await_01.mp3" "await_02.mp3" "await_03.mp3"))
-    ("catch" . ("catch_01.mp3" "catch_02.mp3" "catch_03.mp3"))
-    ("import" . ("import_01.mp3" "import_02.mp3"))
-    (":import" . ("import_01.mp3" "import_02.mp3"))
-    (":require" . ("import_01.mp3" "import_02.mp3"))
-    ("require" . ("import_01.mp3" "import_02.mp3"))
-    ("load" . ("import_01.mp3" "import_02.mp3"))
-    ("load-file" . ("import_01.mp3" "import_02.mp3"))
-    ("v-html" . ("v_html_01.mp3"))
-    ("fuck" . ("fuck_pm_01.mp3" "fuck_pm_02.mp3"))
-    ("shit" . ("fuck_pm_01.mp3" "fuck_pm_02.mp3"))
-    ("damn" . ("fuck_pm_01.mp3" "fuck_pm_02.mp3"))
-    ;; time
-    ("hour" . ("time_each_hour_01.mp3" "time_each_hour_02.mp3"
-               "time_each_hour_03.mp3" "time_each_hour_04.mp3" "time_each_hour_05.mp3"))
-    ("morning" . ("time_morning_01.mp3"))
-    ("before_noon" . ("time_before_noon_01.mp3" "time_before_noon_02.mp3"
-                      "time_before_noon_03.mp3" "time_before_noon_04.mp3"))
-    ("noon" . ("time_noon_01.mp3"))
-    ("evening" . ("time_evening_01.mp3"))
-    ("midnight" . ("time_midnight_01.mp3"))
-    ;; TODO `flycheck' support
-    ("info" . ())
-    ("warning" . ())
-    ("error" . ()))
-  "An alist of pairs of programming language keywords and voice filenames."
-  :type 'alist
-  :safe #'listp
   :group 'rainbow-fart)
 
 (defcustom rainbow-fart-voice-model "JustKowalski"
@@ -131,9 +85,72 @@ If it's nil, the hours remind will not started."
 (defvar rainbow-fart--play-last-time nil
   "The last time of rainbow-fart play.")
 
+(defcustom rainbow-fart-keyword-voices-alist '()
+  "An alist of pairs of programming language keywords and voice filenames."
+  :type 'alist
+  :safe #'listp
+  :group 'rainbow-fart)
+
+;;; Parsing voice pack manifest.json
+
+(defun rainbow-fart-voice-pack-find-json-files ()
+  "Find voice package manifest.json and contributes.json two files."
+  (let ((voice-model-dir (expand-file-name rainbow-fart-voice-model rainbow-fart-voices-directory)))
+    (if (file-exists-p (expand-file-name "contributes.json" voice-model-dir))
+        (list
+         (expand-file-name "manifest.json" voice-model-dir)
+         (expand-file-name "contributes.json" voice-model-dir))
+      (list (expand-file-name "manifest.json" voice-model-dir) nil))))
+
+(defun rainbow-fart-voice-pack-parse-manifest (two-json)
+  "Read in manifest.json file."
+  (let* ((manifest-json-file (car two-json))
+         (contributes-json-file (cadr two-json))
+         (manifest (json-read-file manifest-json-file))
+         (name (alist-get 'name manifest))
+         (display-name (alist-get 'display-name manifest))
+         (version (alist-get 'version manifest))
+         (author (alist-get 'author manifest))
+         ;; (description (alist-get 'description manifest))
+         ;; (avatar (alist-get 'avatar manifest))           ; "avatar.jpg"
+         ;; (avatar-dark (alist-get 'avatar-dark manifest)) ; "avatar-dark.jpg"
+         ;; (languages (alist-get 'languages manifest))     ; vector ["python"]
+         ;; (locale (alist-get 'locale manifest))           ; "zh"
+         ;; (gender (alist-get 'gender manifest))           ; "female"
+         ;; `contributes' is a vector of keywords, voices and texts.
+         (contributes (or (alist-get 'contributes manifest) ; "contributes" is in "manifest.json"
+                          ;; "contributes" is in another file "contributes.json"
+                          (alist-get 'contributes
+                                     (json-read-file
+                                      (expand-file-name
+                                       "contributes.json"
+                                       (file-name-directory manifest-json-file)))))))
+    (message "Loading rainbow-fart voice pack: %s (%s) by %s." name version author)
+    (when (vectorp contributes)
+      ;; reset voices alist
+      (setq rainbow-fart-keyword-voices-alist nil)
+      ;; NOTE `contributes' is a vector. Can't use `loop' to iterate.
+      ;; append to data structure
+      (mapcar
+       (lambda (definition-alist)
+         (let ((keywords (mapcar #'identity (alist-get 'keywords definition-alist)))
+               (voices (mapcar #'identity (alist-get 'voices definition-alist)))
+               (texts (mapcar #'identity (alist-get 'texts definition-alist))))
+           (mapcar
+            (lambda (key-str)
+              (if-let ((keyword (string-trim key-str)))
+                  (add-to-list 'rainbow-fart-keyword-voices-alist (cons keyword voices) 'append)))
+            keywords)))
+       contributes))
+    (message "The rainbow-fart voice pack model: {%s} loaded." display-name)))
+
+(rainbow-fart-voice-pack-parse-manifest (rainbow-fart-voice-pack-find-json-files))
+
+;;; Play
+
 (defun rainbow-fart--get-media-uri (keyword)
   "Get media uri based on KEYWORD."
-  (when-let ((uris (cdr (assoc keyword rainbow-fart-voice-alist))))
+  (when-let ((uris (cdr (assoc keyword rainbow-fart-keyword-voices-alist))))
     (let ((uri (nth (random (length uris)) uris))
           (voice-model-directory
            (expand-file-name rainbow-fart-voice-model rainbow-fart-voices-directory)))
