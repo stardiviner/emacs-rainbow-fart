@@ -41,11 +41,18 @@ Just like the screencast video shows, A voice played when you type some keywords
 
 ** choose voice model
 
-#+begin_src emacs-lisp
-(setq rainbow-fart-voice-model "JustKowalski")
-#+end_src
+- default built-in model voice pack "JustKowalski".
 
-*NOTE*: Currently only "JustKowalski" built-in. Contribution welcome.
+  #+begin_src emacs-lisp
+  (setq rainbow-fart-voice-model "JustKowalski")
+  #+end_src
+
+- copied two model voice pack "糖糖", "千岛" from
+  https://github.com/heixiaobai/rainbow-fart-voice-pack. Thanks @heixiaobai.
+
+  #+begin_src emacs-lisp
+  (setq rainbow-fart-voice-model "糖糖/PGG-Sharonring-JavaScript-Chinese")
+  #+end_src
 
 ** control keyword voice
 
