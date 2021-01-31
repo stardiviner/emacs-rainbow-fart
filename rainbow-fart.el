@@ -71,7 +71,7 @@ If it's nil, the hours remind will not started."
   :safe #'stringp
   :group 'rainbow-fart)
 
-(defcustom rainbow-fart-enable-modes nil
+(defcustom rainbow-fart-ignore-modes nil
   "A list of major modes which will enable rainbow-fart-mode."
   :type 'list
   :safe #'listp
@@ -164,7 +164,8 @@ If it's nil, the hours remind will not started."
   (unless (or rainbow-fart--playing
               (when rainbow-fart-keyword-interval
                 (not (if rainbow-fart--play-last-time
-                         (> (- (float-time) rainbow-fart--play-last-time) rainbow-fart-keyword-interval)
+                         (> (- (float-time) rainbow-fart--play-last-time)
+                            rainbow-fart-keyword-interval)
                        (setq rainbow-fart--play-last-time (float-time))))))
     (when-let ((uri (rainbow-fart--get-media-uri keyword))
                (command (or
@@ -186,8 +187,8 @@ If it's nil, the hours remind will not started."
 
 (defun rainbow-fart--post-self-insert ()
   "A hook function on `post-self-insert-hook' to play audio."
-  (when (or (derived-mode-p 'prog-mode)
-            (memq major-mode rainbow-fart-enable-modes))
+  (when (and (derived-mode-p 'prog-mode)
+             (memq major-mode rainbow-fart-ignore-modes))
     (let* ((prefix (save-excursion
                      ;; support prefix like "if(", "if (", "=>" etc keywords following punctuation.
                      (rainbow-fart-get-prefix "\\(?1:\\_<[^\\ ].\\_>\\)\\ ?[[:punct:]]?" 1)))
