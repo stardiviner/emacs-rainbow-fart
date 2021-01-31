@@ -180,13 +180,17 @@ If it's nil, the hours remind will not started."
                                 (setq rainbow-fart--play-last-time (float-time)))))))
 ;;; prefix detection
 
+(defun rainbow-fart-get-prefix (regexp &optional expression limit)
+  (when (looking-back regexp limit)
+    (or (match-string-no-properties (or expression 0)) "")))
+
 (defun rainbow-fart--post-self-insert ()
   "A hook function on `post-self-insert-hook' to play audio."
   (when (or (derived-mode-p 'prog-mode)
             (memq major-mode rainbow-fart-enable-modes))
     (let* ((prefix (save-excursion
-                     (goto-char (- (point) 1))
-                     (thing-at-point 'symbol)))
+                     ;; support prefix like "if(", "if (", "=>" etc keywords following punctuation.
+                     (rainbow-fart-get-prefix "\\(?1:\\_<[^\\ ].\\_>\\)\\ ?[[:punct:]]?" 1)))
            (face (get-text-property (- (point) 1) 'face)))
       (when (or (memq face '(font-lock-keyword-face))
                 (null face))
