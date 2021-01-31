@@ -17,6 +17,10 @@ Here is a screencast which is recorded by [[https://github.com/DogLooksGood][Dog
 
 [[Emacs rainbow-fart demo.mp4][Emacs rainbow-fart demo.mp4]]
 
+<video src="Emacs rainbow-fart demo.mp4" controls="controls">
+  You'r web browser doesn't support video tag.
+</video>
+
 * Features
 
 - auto play voice when you type keywords
