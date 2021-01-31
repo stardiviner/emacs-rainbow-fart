@@ -17,9 +17,11 @@ Here is a screencast which is recorded by [[https://github.com/DogLooksGood][Dog
 
 [[Emacs rainbow-fart demo.mp4][Emacs rainbow-fart demo.mp4]]
 
+#+begin_export html
 <video src="Emacs rainbow-fart demo.mp4" controls="controls">
   You'r web browser doesn't support video tag.
 </video>
+#+end_export
 
 * Features
 
