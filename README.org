@@ -78,13 +78,17 @@ Disable hourly reminder:
 (setq rainbow-fart-time-interval nil)
 #+end_src
 
-* Contribution
+* DONE Contribution                                                 :ARCHIVE:
+  CLOSED: [2021-01-31 Sun 09:28]
+  :LOGBOOK:
+  - State "DONE"       from              [2021-01-31 Sun 09:28]
+  :END:
 
-- [ ] Need an elegant solution to handle different model voices which have different voice files
-- [ ] Need more voice models
-- [ ] I will add contributors into list
+- [X] Need an elegant solution to handle different model voices which have different voice files
+- [X] Need more voice models
+- [X] I will add contributors into list
 
-** Contributors
+* Contributors
 
 - DogLooksGood
 - lujun9972
