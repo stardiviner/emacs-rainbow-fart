@@ -36,12 +36,6 @@
   :prefix "rainbow-fart-"
   :group 'rainbow-fart)
 
-(defcustom rainbow-fart-voice-model "JustKowalski"
-  "The voice model to be used."
-  :type 'string
-  :safe #'stringp
-  :group 'rainbow-fart)
-
 (defcustom rainbow-fart-voices-directory
   (concat (file-name-directory (or load-file-name buffer-file-name)) "voices/")
   "The directory of voices."
@@ -83,6 +77,17 @@ If it's nil, the hours remind will not started."
 (defvar rainbow-fart--play-last-time nil
   "The last time of rainbow-fart play.")
 
+(defcustom rainbow-fart-voice-pack-alist '((t . "JustKowalski"))
+  "A list of model voice packs."
+  :type 'alist
+  :safe #'listp
+  :group 'rainbow-fart)
+
+;;; TODO Support multiple voice packs data structure.
+(defvar rainbow-fart-manifest-alist nil
+  "An alist of model voice pack's manifest info.")
+
+;;; TODO Support multiple voice packs data structure.
 (defcustom rainbow-fart-keyword-voices-alist '()
   "An alist of pairs of programming language keywords and voice filenames."
   :type 'alist
@@ -91,9 +96,9 @@ If it's nil, the hours remind will not started."
 
 ;;; Parsing voice pack manifest.json
 
-(defun rainbow-fart-voice-pack-find-json-files ()
+(defun rainbow-fart-voice-pack-find-json-files (voice-pack)
   "Find voice package manifest.json and contributes.json two files."
-  (let ((voice-model-dir (expand-file-name rainbow-fart-voice-model rainbow-fart-voices-directory)))
+  (let ((voice-model-dir (expand-file-name voice-pack rainbow-fart-voices-directory)))
     (if (file-exists-p (expand-file-name "contributes.json" voice-model-dir))
         (list
          (expand-file-name "manifest.json" voice-model-dir)
@@ -112,7 +117,7 @@ If it's nil, the hours remind will not started."
          ;; (description (alist-get 'description manifest))
          ;; (avatar (alist-get 'avatar manifest))           ; "avatar.jpg"
          ;; (avatar-dark (alist-get 'avatar-dark manifest)) ; "avatar-dark.jpg"
-         ;; (languages (alist-get 'languages manifest))     ; vector ["python"]
+         (languages (alist-get 'languages manifest))     ; vector ["python"]
          ;; (locale (alist-get 'locale manifest))           ; "zh"
          ;; (gender (alist-get 'gender manifest))           ; "female"
          ;; `contributes' is a vector of keywords, voices and texts.
@@ -123,6 +128,7 @@ If it's nil, the hours remind will not started."
                                       (expand-file-name
                                        "contributes.json"
                                        (file-name-directory manifest-json-file)))))))
+    (setq rainbow-fart-manifest-alist manifest)
     (message "Loading rainbow-fart voice pack: %s (%s) by %s." name version author)
     (when (vectorp contributes)
       ;; reset voices alist
@@ -142,7 +148,9 @@ If it's nil, the hours remind will not started."
        contributes))
     (message "The rainbow-fart voice pack model: {%s} loaded." display-name)))
 
-(rainbow-fart-voice-pack-parse-manifest (rainbow-fart-voice-pack-find-json-files))
+;; initialize with default voice pack.
+(rainbow-fart-voice-pack-parse-manifest
+ (rainbow-fart-voice-pack-find-json-files (alist-get 't rainbow-fart-voice-pack-alist)))
 
 ;;; Play
 
